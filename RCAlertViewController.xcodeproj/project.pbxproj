@@ -10,6 +10,8 @@
 		948AC4871DE9F9300053251D /* RCAlertViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 948AC47D1DE9F9300053251D /* RCAlertViewController.framework */; };
 		948AC48C1DE9F9300053251D /* RCAlertViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948AC48B1DE9F9300053251D /* RCAlertViewControllerTests.swift */; };
 		948AC48E1DE9F9300053251D /* RCAlertViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 948AC4801DE9F9300053251D /* RCAlertViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		948AC4981DE9F9A60053251D /* RCAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948AC4971DE9F9A60053251D /* RCAlertView.swift */; };
+		948AC49A1DE9FFDE0053251D /* RCCoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948AC4991DE9FFDE0053251D /* RCCoreView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 		948AC4861DE9F9300053251D /* RCAlertViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RCAlertViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		948AC48B1DE9F9300053251D /* RCAlertViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCAlertViewControllerTests.swift; sourceTree = "<group>"; };
 		948AC48D1DE9F9300053251D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		948AC4971DE9F9A60053251D /* RCAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCAlertView.swift; sourceTree = "<group>"; };
+		948AC4991DE9FFDE0053251D /* RCCoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCCoreView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,8 @@
 			children = (
 				948AC4801DE9F9300053251D /* RCAlertViewController.h */,
 				948AC4811DE9F9300053251D /* Info.plist */,
+				948AC4971DE9F9A60053251D /* RCAlertView.swift */,
+				948AC4991DE9FFDE0053251D /* RCCoreView.swift */,
 			);
 			path = RCAlertViewController;
 			sourceTree = "<group>";
@@ -149,6 +155,7 @@
 					948AC47C1DE9F9300053251D = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 7VAFMRYWYR;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 					948AC4851DE9F9300053251D = {
@@ -198,6 +205,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				948AC49A1DE9FFDE0053251D /* RCCoreView.swift in Sources */,
+				948AC4981DE9F9A60053251D /* RCAlertView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +331,7 @@
 		948AC4921DE9F9300053251D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7VAFMRYWYR;
@@ -334,6 +344,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = rcocuzzo8.RCAlertViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -341,6 +352,7 @@
 		948AC4931DE9F9300053251D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7VAFMRYWYR;
@@ -360,6 +372,7 @@
 		948AC4951DE9F9300053251D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 7VAFMRYWYR;
 				INFOPLIST_FILE = RCAlertViewControllerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -372,6 +385,7 @@
 		948AC4961DE9F9300053251D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 7VAFMRYWYR;
 				INFOPLIST_FILE = RCAlertViewControllerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
