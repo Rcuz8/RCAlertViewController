@@ -57,6 +57,7 @@ class RCAlertView: UIViewController {
     }
     
     func dismissMe(){
+        rcView.clearButtons()
         navigationController?.popViewController(animated: true)
         dismiss(animated: false, completion: nil)
     }
@@ -76,6 +77,16 @@ class RCAlertView: UIViewController {
     func initTextFields(title: String, titleIsCentered: Bool, subTitle: String, subtitleIsCentered: Bool){
 
      self.rcView.initTextFields(title: title, titleIsCentered: titleIsCentered, subTitle: subTitle, subtitleIsCentered: subtitleIsCentered)
+    }
+    
+    typealias CompletionHandler = (_ buttonIsActive:Bool) -> Void
+    
+    
+    func addButton(title: String, type: UIButtonType)-> UIButton {
+        let button = rcView.addButton(title: title, type: type)
+        rcView.setNeedsDisplay()
+       
+        return button
     }
     
     func adjustDimensions(width: Float, height: Float){
