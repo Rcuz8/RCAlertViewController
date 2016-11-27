@@ -22,7 +22,7 @@ class RCAlertView: UIViewController {
         self.modalPresentationStyle = .overCurrentContext
         let blur = UIBlurEffect(style: .dark)
         blurView = UIVisualEffectView(effect: blur)
-        blurView.alpha = 0.5
+        blurView.alpha = 0.8
         blurView.frame = self.view.bounds
         self.view.addSubview(blurView)
         
@@ -34,9 +34,9 @@ class RCAlertView: UIViewController {
         adjustDimensions(width: 270, height: 144) //Default Notification Size
         
         self.view.addSubview(rcView)
-        
-        
+   
     }
+    
     
     func addLongPressRecognizer(){
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(dismissMe))
@@ -58,11 +58,24 @@ class RCAlertView: UIViewController {
     
     func dismissMe(){
         navigationController?.popViewController(animated: true)
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addTitle(title: String, centered: Bool) {
+        self.rcView.addTitle(title: title, centered: centered)
+    }
+    
+    func addSubtitle(title: String, centered: Bool) {
+        self.rcView.addSubtitle(title: title, centered: centered)
+    }
+    
+    func initTextFields(title: String, titleIsCentered: Bool, subTitle: String, subtitleIsCentered: Bool){
+
+     self.rcView.initTextFields(title: title, titleIsCentered: titleIsCentered, subTitle: subTitle, subtitleIsCentered: subtitleIsCentered)
     }
     
     func adjustDimensions(width: Float, height: Float){
@@ -76,8 +89,10 @@ class RCAlertView: UIViewController {
             
             print("Creating frame:\nx: \(CGFloat(margin))\ny: \(CGFloat(marginH))\nwidth: \(CGFloat(width))\nheight: \(CGFloat(height))")
             rcView.frame = CGRect(x:  CGFloat(margin), y: CGFloat(marginH), width: CGFloat(width), height: CGFloat(height))
+            rcView.rectInScreen = CGRect(x:  CGFloat(margin), y: CGFloat(marginH), width: CGFloat(width), height: CGFloat(height))
         } else {
             rcView.frame = CGRect(x:  0, y: 0, width: screenWidth, height: screenHeight)
+            rcView.rectInScreen = CGRect(x:  0, y: 0, width: screenWidth, height: screenHeight)
         }
         
     }
@@ -95,20 +110,14 @@ class RCAlertView: UIViewController {
         }
     }
     
-    /**
-     Lorem ipsum dolor sit amet.
-     
-     @param bar Consectetur adipisicing elit.
-     
-     @return Sed do eiusmod tempor.
-     */
+    
     func changeColor(to: UIColor){
         rcView.backgroundColor = to
     }
     
     func display() {
         let appDelegate = UIApplication.shared.delegate
-        appDelegate?.window??.rootViewController?.present(self, animated: true, completion: nil)
+        appDelegate?.window??.rootViewController?.present(self, animated: false, completion: nil)
     }
     
 }
