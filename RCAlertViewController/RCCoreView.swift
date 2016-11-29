@@ -106,6 +106,8 @@ class RCCoreView: UIView {
             let newFrame = CGRect(x: x, y: y, width: width, height: subtitleCGR.maxY+80)
             super.frame = newFrame
             self.frame = newFrame
+            super.center = CGPoint.Center
+            self.center = CGPoint.Center
             
             
             self.setNeedsDisplay()
@@ -177,6 +179,7 @@ class RCCoreView: UIView {
                         print("Button count: \(buttons.count)")
                     }
                     
+                    
                 }
             }
         }
@@ -205,19 +208,8 @@ class RCCoreView: UIView {
             button.frame = buttonRect
             button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
             button.titleLabel?.adjustsFontSizeToFitWidth = true
-//            button.buttonType = type
-//            func execCompletionHandler(string: String){
-//                if button != nil && button.frame != nil {
-//              //  completion(true, nil)
-//                }
-//            }
-          
-        //    button.addTarget((self, action: "buttonClicked:", for: .touchUpInside)
-          //  let gestureRecognizer = UITapGestureRecognizer(target: button, action:  #selector(buttonClicked(_:)))
-         //   button.addGestureRecognizer(gestureRecognizer)
             print(buttonRect)
-            
-         //   button.backgroundColor = UIColor.brown
+            //   button.backgroundColor = UIColor.brown
             self.addSubview(button)
             buttons.append(button)
             
@@ -228,9 +220,9 @@ class RCCoreView: UIView {
             let width = self.frame.width / 2 - 7// Two buttons now
             let height = BUTTON_HEIGHT
             let buttonRect = CGRect(x: CGFloat(x), y: y, width: width+8, height: CGFloat(height))
-           
+            
             buttons[0].frame = buttonRect
-           let button2Rect = CGRect(x: CGFloat(buttonRect.width+7), y: y, width: width-10, height: CGFloat(height))
+            let button2Rect = CGRect(x: CGFloat(buttonRect.width+7), y: y, width: width-10, height: CGFloat(height))
             
             buttons[0] = UIButton(frame: buttonRect)
             button = UIButton(type: type) // if you want to set the type use like UIButton(type: .RoundedRect) or UIButton(type: .Custom)
@@ -238,35 +230,172 @@ class RCCoreView: UIView {
             button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
             button.titleLabel?.adjustsFontSizeToFitWidth = true
             button.frame = button2Rect
-         //   button.layer.borderWidth = 2
-            //            button.buttonType = type
-            //            func execCompletionHandler(string: String){
-            //                if button != nil && button.frame != nil {
-            //              //  completion(true, nil)
-            //                }
-            //            }
+            //  button.backgroundColor = UIColor.cyan
+            self.addSubview(button)
+            buttons.append(button)
             
-            //    button.addTarget((self, action: "buttonClicked:", for: .touchUpInside)
-            //  let gestureRecognizer = UITapGestureRecognizer(target: button, action:  #selector(buttonClicked(_:)))
-            //   button.addGestureRecognizer(gestureRecognizer)
-         //   print(buttonRect)
-          //  button.backgroundColor = UIColor.cyan
+        } else if buttons.count > 1 {
+            
+            // Init button
+            let y = self.subtitle.frame.maxY + 6
+            button = UIButton(type: type)
+            button.setTitle(title, for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+            button.titleLabel?.adjustsFontSizeToFitWidth = true
+            let lastButtonY = CGFloat(BUTTON_HEIGHT*buttons.count)
+            button.frame = CGRect(x: CGFloat(0), y: (y+(lastButtonY)), width: super.frame.width, height: CGFloat(BUTTON_HEIGHT))
+            buttons.append(button)
             self.addSubview(button)
             
-            buttons.append(button)
-          //  self.setNeedsDisplay()
+            print("INFORMATION OF BUTTONS CURRENTLY:\n\nCurrent amount of buttons: \(buttons.count)")
+            for button in buttons {
+            print("Button Info: \nFrame: \(button.frame)\nTitle:\(button.titleLabel?.text)\n")
+            }
             
-            path = UIBezierPath()
-            path.move(to: CGPoint(x: 0, y: 0))
+            var buttonNum = 0
+            for button in buttons {
+                let by = CGFloat(BUTTON_HEIGHT*buttonNum)
+                button.frame = CGRect(x: CGFloat(0), y: y + by, width: super.frame.width, height: CGFloat(BUTTON_HEIGHT))
+                buttonNum = buttonNum + 1
+            }
+            
+            // Re-initialize frame of view with new dimensions
+            let lb = buttons[buttons.count-1] as! UIButton
+            let lby = lb.frame.maxY
+            let lastY = lby //+ CGFloat(BUTTON_HEIGHT)
+            // Init main frame
+            let ox = self.rectInScreen.minX
+            let oy = self.rectInScreen.minY
+            let owidth = self.rectInScreen.width
+            let newFrame = CGRect(x: ox, y: oy, width: owidth, height: lastY)
+            super.frame = newFrame
+            self.frame = newFrame
+            super.center = CGPoint.Center
+            self.center = CGPoint.Center
+            print("done..")
             
             
+            self.setNeedsDisplay()
+            
+            /*
+            // Get initial dimensions (title, subtitle, line)
+            let topButtonY = self.subtitle.frame.maxY + 6
+            let x = 0
+            let width = super.frame.width // Only one button at the moment
+            let height = BUTTON_HEIGHT
+            let buttonRect = CGRect(x: CGFloat(x), y: topButtonY, width: width, height: CGFloat(height))
+            button = UIButton(type: type) // if you want to set the type use like UIButton(type: .RoundedRect) or UIButton(type: .Custom)
+            button.setTitle(title, for: .normal)
+               button.frame = buttonRect                     //            IMPLEMENT AT END
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+            button.titleLabel?.adjustsFontSizeToFitWidth = true
+            print(buttonRect)
+            //   button.backgroundColor = UIColor.brown
+            
+            var slot:CGFloat = 0
+            var lastY: CGFloat = 0
+            print("Expected Frame dimensions: \nX: same, Y: Different (+70), width: same, height: same (70)")
+            //   print("-------------------------")
+            print(buttons.count)
+          //  var slotButtons = [UIButton] ()
+            
+            print("-------------------------")
+            
+           
+            
+            var bSlot = 0
+            for slotButton in buttons {
+                let buttonX = buttonRect.minX
+                let buttonWidth = buttonRect.width
+                let buttonHeight:CGFloat = CGFloat(BUTTON_HEIGHT)
+                let buttonY = buttonRect.minY+(buttonHeight*slot)
+                let buttonFrame = CGRect(x: buttonX, y: buttonY, width: buttonWidth, height: buttonHeight)
+                print(buttonFrame)
+                let buttonType = slotButton.buttonType
+                let buttonTitle = slotButton.titleLabel!.text
+                let newSlotButton = UIButton(type: buttonType)
+                newSlotButton.setTitle(buttonTitle, for: .normal)
+                newSlotButton.frame = buttonFrame
+                buttons[bSlot].removeFromSuperview()
+                buttons[bSlot].frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+                buttons[bSlot] = newSlotButton
+                slot = slot + 1
+                bSlot = bSlot + 1
+                newSlotButton.backgroundColor = UIColor.lightBlue
+            //   self.addSubview(newSlotButton)
+                
+            }
+            
+        
+            print("-----------------------------------------")
+            // for button in buttons, yVal = initial + (slotNumber*BUTTON_HEIGHT)
+            
+            // Add (Button Height * amount of buttons) to initial dimensions to get final size
+            // Re-initialize frame of view with new dimensions
+            let lb = buttons[buttons.count-1] as! UIButton
+            let lby = lb.frame.maxY
+            lastY = lby + CGFloat(BUTTON_HEIGHT)
+            // Init main frame
+            let ox = self.rectInScreen.minX
+            let oy = self.rectInScreen.minY
+            let owidth = self.rectInScreen.width
+            let newFrame = CGRect(x: ox, y: oy, width: width, height: lastY)
+            super.frame = newFrame
+            self.frame = newFrame
+            super.center = CGPoint.Center
+            self.center = CGPoint.Center
+            print("done..")
+            
+            
+            self.setNeedsDisplay()
+            */
+            
+            buttons[0].removeFromSuperview()
+            
+            print("Real button count: \(buttons.count)")
+            if buttons[0].frame.width < super.frame.width {
+                print("Widths:")
+                print(buttons[0].frame.width)
+                print(super.frame.width)
+                print(self.rectInScreen.width)
+                let w = super.frame.width
+                let h = buttons[0].frame.height
+                let myX = buttons[0].frame.minX
+                let myY = buttons[0].frame.minY
+                buttons[0].frame = CGRect(x: myX, y: myY, width: w*2, height: h)
+                
+                var b = buttons[0]
+                b.removeFromSuperview()
+                buttons[0].removeFromSuperview()
+                let bcgr = CGRect(x: myX, y: myY, width: w, height: h)
+                let someButton = UIButton(type: b.buttonType)
+                someButton.frame = bcgr
+                if let text = someButton.titleLabel?.text {
+                    someButton.setTitle(text, for: .normal)
+                }
+                someButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+                someButton.titleLabel?.adjustsFontSizeToFitWidth = true
+                b = someButton
+                b.center = CGPoint.Center
+                buttons[0] = b
+                //     self.addSubview(b)
+                
+            }
+        }
+        if button == nil {
+            button = UIButton()
+        }
+        path = UIBezierPath()
+        path.move(to: CGPoint(x: 0, y: 0))
+        
+        
+        
+        for b in buttons {
+            print(b.frame.width)
+         //   b.removeFromSuperview()
         }
         
         self.setNeedsDisplay()
-        
-        
-        print("Real button count: \(buttons.count)")
-        
         return button
     }
     
